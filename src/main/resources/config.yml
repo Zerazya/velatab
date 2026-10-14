@@ -1,0 +1,88 @@
+# VelaTab - tab, tag au-dessus de la tête et chat colorés selon le grade.
+#
+# Avec LuckPerms : grade = groupe principal, préfixe/suffixe/poids = ceux de LuckPerms.
+#   Les réglages de "groups" ci-dessous (prefix, suffix, color, weight, display) les remplacent si présents.
+# Sans LuckPerms : le joueur prend le grade de "groups" (poids le plus haut) pour lequel il a la
+#   permission velatab.group.<grade> (ex : velatab.group.admin). Sinon "default".
+#
+# Placeholders disponibles dans les formats, en-têtes et pieds de page :
+#   <prefix> <suffix> <name> <player> <rank> <group> <rank-color> (couleur du grade)
+#   <online> <max> <world> <ping> <tps> <time> <date>
+# Les placeholders PlaceholderAPI (%vault_eco_balance%, ...) fonctionnent aussi (sauf dans le chat).
+# Les codes &a, &#ff8800 et le MiniMessage (<gradient:...>) sont acceptés.
+
+refresh-ticks: 20          # fréquence de mise à jour (20 = chaque seconde)
+default-color: white       # couleur d'un grade sans couleur détectée
+
+tab:
+  sort-by-rank: true       # trie les joueurs par poids de grade (le plus haut en premier)
+  # Nom affiché dans le tab ("" = nom vanilla). Utilisez <rank-color> pour la couleur du grade.
+  player-format: "<prefix><rank-color><name><suffix>"
+  header:
+    - ""
+    - "<gradient:#55ffff:#aa66ff><bold>MON SERVEUR</bold></gradient>"
+    - "<gray>Joueurs en ligne : <white><online><dark_gray>/<white><max>"
+    - ""
+  footer:
+    - ""
+    - "<gray>Grade : <rank-color><rank> <dark_gray>| <gray>Ping : <ping> <dark_gray>| <gray>TPS : <tps>"
+    - "<gray>Monde : <white><world> <dark_gray>| <gray><time>"
+    - ""
+
+# Tag au-dessus de la tête : même couleur que le grade (équipes du scoreboard principal)
+nametag:
+  enabled: true
+  show-prefix: true        # affiche le préfixe devant le pseudo
+  show-suffix: false
+  collision: true          # false = les joueurs peuvent se traverser
+
+# Chat coloré selon le grade. À désactiver si vous utilisez déjà un autre plugin de chat (ChatFormat...).
+chat:
+  enabled: true
+  format: "<prefix><rank-color><name><suffix><dark_gray> » <white><message>"
+
+time:
+  zone: Europe/Paris
+  format: "HH:mm"
+  date-format: "dd/MM/yyyy"
+
+# Exemples de grades (nom du groupe LuckPerms en minuscules). Tous les champs sont facultatifs.
+groups:
+  owner:
+    display: "Fondateur"
+    prefix: "&4[Fondateur] "
+    color: dark_red
+    weight: 100
+  admin:
+    display: "Admin"
+    prefix: "&c[Admin] "
+    color: red
+    weight: 90
+  mod:
+    display: "Modérateur"
+    prefix: "&9[Modo] "
+    color: blue
+    weight: 80
+  helper:
+    display: "Helper"
+    prefix: "&b[Helper] "
+    color: aqua
+    weight: 70
+  vip:
+    display: "VIP"
+    prefix: "&6[VIP] "
+    color: gold
+    weight: 50
+  default:
+    display: "Joueur"
+    prefix: "&7"
+    color: gray
+    weight: 0
+
+messages:
+  no-permission: "<red>Vous n'avez pas la permission."
+  reloaded: "<green>VelaTab rechargé."
+  refreshed: "<green>Tab mis à jour."
+  unknown-player: "<red>Joueur introuvable : <white><player>"
+  info: "<gray>Joueur <white><player><gray> | Grade <white><group> <gray>(<display>) | Poids <white><weight><gray> | Couleur"
+  help: "<aqua><bold>VelaTab<newline><yellow>/velatab reload <gray>- recharge la config<newline><yellow>/velatab refresh <gray>- met à jour le tab<newline><yellow>/velatab info [joueur] <gray>- grade et couleur détectés"

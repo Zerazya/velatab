@@ -1,0 +1,18 @@
+name: VelaTab
+version: '${version}'
+main: fr.velatab.VelaTabPlugin
+api-version: '26.2'
+description: Tab (en-tête, pied de page), tag et chat colorés selon le grade
+softdepend: [LuckPerms, PlaceholderAPI]
+commands:
+  velatab:
+    description: Administration de VelaTab
+    usage: /velatab <reload|refresh|info>
+    aliases: [vtab]
+permissions:
+  velatab.admin:
+    description: Recharger et inspecter VelaTab
+    default: op
+  velatab.chat.color:
+    description: Utiliser les couleurs (&a, &#ff8800) dans le chat
+    default: false
